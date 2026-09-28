@@ -28,8 +28,6 @@
         .hdr-shine::before { content:''; position:absolute; inset:0; background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.08) 50%,transparent 60%); animation:shimmer 3.5s infinite ease-in-out; pointer-events:none; }
         @keyframes slideUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
         .card-enter { animation:slideUp .38s cubic-bezier(.16,1,.3,1) forwards; opacity:0; }
-        @keyframes fadeScale { from{opacity:0;transform:scale(.92) translateY(8px)} to{opacity:1;transform:scale(1) translateY(0)} }
-        .fade-in { animation:fadeScale .28s cubic-bezier(.16,1,.3,1) forwards; }
         @keyframes qtyPop { 0%{transform:scale(1)} 40%{transform:scale(1.35);color:#1B365D} 100%{transform:scale(1)} }
         .qty-pop { animation:qtyPop .22s ease; }
         
@@ -45,7 +43,7 @@
         @keyframes pulseGlow { 0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(56,189,248,.4);border-color:rgba(56,189,248,.5)} 50%{transform:scale(1.05);box-shadow:0 0 18px 5px rgba(56,189,248,.5);border-color:rgba(56,189,248,1)} }
         .step-pulse { animation:pulseGlow 1.8s infinite ease-in-out; }
 
-        /* Slide to Confirm Track */
+        /* Slide Track */
         .slide-track {
             background: linear-gradient(135deg, #0A192F 0%, #1B365D 60%, #0f2a4a 100%);
             border: 1.5px solid rgba(56,189,248,0.45);
@@ -82,19 +80,10 @@
             display: flex; align-items: center; justify-content: center; color: #fff; cursor: grab; z-index: 10;
             border: 1px solid rgba(56,189,248,0.5); animation: thumbPulse 2.2s ease-in-out infinite; transition: background 0.2s;
         }
-        @keyframes thumbPulse {
-            0%,100% { box-shadow: 0 0 0 0 rgba(56,189,248,0.5), 0 2px 8px rgba(0,0,0,0.4); }
-            50%      { box-shadow: 0 0 0 6px rgba(56,189,248,0.18), 0 2px 12px rgba(0,0,0,0.5); }
-        }
         .slide-thumb:active { cursor: grabbing; background: linear-gradient(145deg, #255a92, #1B365D); }
         .slide-thumb i { font-size: 16px; color: #38BDF8; filter: drop-shadow(0 0 6px rgba(56,189,248,0.9)); }
 
         /* Step Process Arrows */
-        @keyframes arrowChase { 0%{opacity:0.15; transform:translateX(-2px)} 50%{opacity:1; transform:translateX(0px)} 100%{opacity:0.15; transform:translateX(2px)} }
-        .arr-active i:nth-child(1){ animation:arrowChase .7s .00s infinite; color:#38BDF8 !important; }
-        .arr-active i:nth-child(2){ animation:arrowChase .7s .15s infinite; color:#38BDF8 !important; }
-        .arr-active i:nth-child(3){ animation:arrowChase .7s .30s infinite; color:#38BDF8 !important; }
-        .arr-done i { color:#22C55E !important; opacity:1; }
         @keyframes stepGlow { 0%,100% { box-shadow:0 0 0 0 rgba(56,189,248,0); } 50% { box-shadow:0 0 30px 14px rgba(56,189,248,0.42); } }
         .s-glow { animation:stepGlow 1.6s ease-in-out infinite; }
         .clock-spin { animation:clockTick 2.4s linear infinite; display:inline-block; }
@@ -111,16 +100,16 @@
 </head>
 <body class="font-sans text-slate-800 text-sm">
 
-<div class="app-container flex flex-col pb-28">
+<div class="app-container flex flex-col pb-32">
 
-    <!-- Premium Header -->
+    <!-- Premium Header with Logo -->
     <div class="bg-navyPrimary text-center py-5 px-3 shadow-md rounded-b-3xl mb-4 relative overflow-hidden hdr-shine border-b-2 border-sky-400/30">
-        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-2 border border-white/20 backdrop-blur-md step-pulse">
-            <i class="fa-solid fa-utensils text-sky-300 text-xl"></i>
+        <div class="inline-block mb-2 relative z-10 step-pulse">
+            <img src="Logo PNG-white.png" alt="Independence Hotel Logo" class="h-16 w-auto mx-auto object-contain drop-shadow-md">
         </div>
-        <h1 class="text-white text-[15px] font-extrabold tracking-widest uppercase">INDEPENDENCE HOTEL</h1>
-        <p class="text-sky-300 text-[11px] mt-0.5 font-bold tracking-wider">SMART IN-ROOM DINING</p>
-        <div class="mt-3 inline-block bg-navyDark/50 border border-sky-400/30 text-sky-200 px-3 py-1 rounded-full text-[10px] font-bold">
+        <h1 class="text-white text-[15px] font-extrabold tracking-widest uppercase relative z-10 drop-shadow-sm">INDEPENDENCE HOTEL</h1>
+        <p class="text-sky-300 text-[11px] mt-0.5 font-bold tracking-wider relative z-10 drop-shadow-sm">SMART IN-ROOM DINING</p>
+        <div class="mt-3 inline-block bg-navyDark/50 border border-sky-400/30 text-sky-200 px-3 py-1 rounded-full text-[10px] font-bold relative z-10">
             <i class="fa-solid fa-phone-volume mr-1"></i> Dial 830 for Assistance
         </div>
     </div>
@@ -141,7 +130,7 @@
                             oninput="clearFieldErr('roomNumber','errRoom')">
                         <i class="fa-solid fa-bed absolute left-3 top-3.5 text-slate-400 text-xs"></i>
                     </div>
-                    <p class="field-err" id="errRoom">សូមបញ្ចូលលេខបន្ទប់</p>
+                    <p class="field-err" id="errRoom">Required</p>
                 </div>
                 <div>
                     <label class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1 block">Guest Name *</label>
@@ -151,7 +140,7 @@
                             oninput="clearFieldErr('guestName','errName')">
                         <i class="fa-regular fa-user absolute left-3 top-3.5 text-slate-400 text-xs"></i>
                     </div>
-                    <p class="field-err" id="errName">សូមបញ្ចូលឈ្មោះ</p>
+                    <p class="field-err" id="errName">Required</p>
                 </div>
             </div>
         </div>
@@ -161,7 +150,11 @@
             <button onclick="filterMenu('all')" class="cat-btn active px-4 py-2 bg-navyPrimary text-white rounded-xl text-xs font-bold whitespace-nowrap shadow-md">All Items</button>
             <button onclick="filterMenu('breakfast')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Breakfast</button>
             <button onclick="filterMenu('starters')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Starters & Soups</button>
+            <button onclick="filterMenu('asian')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Rice & Noodle</button>
+            <button onclick="filterMenu('pasta')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Pasta & Pizza</button>
+            <button onclick="filterMenu('snacks')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Snacks</button>
             <button onclick="filterMenu('mains')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Main Courses</button>
+            <button onclick="filterMenu('desserts')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Desserts</button>
             <button onclick="filterMenu('drinks')" class="cat-btn px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-xs font-bold whitespace-nowrap">Beverages</button>
         </div>
 
@@ -178,7 +171,8 @@
         <div>
             <p class="text-[10px] text-sky-300 font-bold uppercase tracking-wider"><span id="totalQtyDisplay" class="text-white">0</span> Items Selected</p>
             <p class="text-xl font-black text-white">
-                $<span id="totalPriceDisplay" class="num-flip inline-block">0.00</span>
+                $<span id="totalPriceDisplay" class="num-flip inline-block">0.00</span> 
+                <span class="text-[9px] text-slate-400 font-medium"> (Net)</span>
             </p>
         </div>
         <button type="button" onclick="openCartModal()"
@@ -196,7 +190,7 @@
         <div class="bg-gradient-to-r from-navyDark to-navyPrimary px-5 py-4 flex justify-between items-center relative overflow-hidden hdr-shine shrink-0">
             <div class="flex items-center space-x-3 relative z-10">
                 <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center border border-white/25 step-pulse">
-                    <i class="fa-solid fa-basket-shopping text-white text-sm"></i>
+                    <i class="fa-solid fa-file-invoice-dollar text-white text-sm"></i>
                 </div>
                 <div>
                     <p class="text-white font-extrabold text-xs uppercase tracking-widest">Order Summary</p>
@@ -215,9 +209,23 @@
 
         <!-- Total & Slide Action -->
         <div class="p-4 bg-white border-t border-slate-100 shrink-0 space-y-4">
+            
+            <!-- Price Breakdown (+15.5%) -->
+            <div class="border-b border-slate-100 pb-3 space-y-2 mb-2">
+                <div class="flex justify-between items-center text-[11px] text-slate-500 font-bold uppercase tracking-wide">
+                    <span>Subtotal</span>
+                    <span>$<span id="modalSubtotal">0.00</span></span>
+                </div>
+                <div class="flex justify-between items-center text-[11px] text-sky-600 font-bold uppercase tracking-wide">
+                    <span>Tax (10%) & Service (5%)</span>
+                    <span>+$<span id="modalTax">0.00</span></span>
+                </div>
+            </div>
+
+            <!-- Grand Total -->
             <div class="flex justify-between items-center">
-                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Amount</span>
-                <span class="text-lg font-black text-navyPrimary">$<span id="modalTotalAmount">0.00</span></span>
+                <span class="text-xs font-black text-slate-700 uppercase tracking-wider">Grand Total</span>
+                <span class="text-xl font-black text-navyPrimary">$<span id="modalTotalAmount">0.00</span></span>
             </div>
             
             <!-- Beautiful Slide to Confirm -->
@@ -242,25 +250,20 @@
             </div>
             <div class="w-full px-2 pt-2 pb-1">
                 <div class="flex items-start justify-between w-full">
-                    <!-- Step 1 -->
                     <div class="flex flex-col items-center space-y-2 flex-1">
                         <div id="s1" class="w-11 h-11 rounded-full flex items-center justify-center text-base transition-all duration-500 bg-slate-100 text-slate-300 border-2 border-slate-200"><i class="fa-solid fa-paper-plane"></i></div>
                         <span id="s1t" class="text-[11px] font-bold text-slate-400 tracking-wide">Sent</span>
                     </div>
-                    <!-- Arrow 1 -->
                     <div id="arr1" class="flex items-center justify-center space-x-[-3px] flex-1 mt-[14px]">
                         <i class="fa-solid fa-chevron-right text-slate-300 text-[12px]"></i><i class="fa-solid fa-chevron-right text-slate-300 text-[12px]"></i><i class="fa-solid fa-chevron-right text-slate-300 text-[12px]"></i>
                     </div>
-                    <!-- Step 2 -->
                     <div class="flex flex-col items-center space-y-2 flex-1">
                         <div id="s2" class="w-11 h-11 rounded-full flex items-center justify-center text-base transition-all duration-500 bg-slate-100 text-slate-300 border-2 border-slate-200"><i class="fa-solid fa-gears"></i></div>
                         <span id="s2t" class="text-[11px] font-bold text-slate-400 tracking-wide">Processed</span>
                     </div>
-                    <!-- Arrow 2 -->
                     <div id="arr2" class="flex items-center justify-center space-x-[-3px] flex-1 mt-[14px]">
                         <i class="fa-solid fa-chevron-right text-slate-300 text-[12px]"></i><i class="fa-solid fa-chevron-right text-slate-300 text-[12px]"></i><i class="fa-solid fa-chevron-right text-slate-300 text-[12px]"></i>
                     </div>
-                    <!-- Step 3 -->
                     <div class="flex flex-col items-center space-y-2 flex-1">
                         <div id="s3" class="w-11 h-11 rounded-full flex items-center justify-center text-base transition-all duration-500 bg-slate-100 text-slate-300 border-2 border-slate-200"><i id="s3icon" class="fa-regular fa-clock"></i></div>
                         <span id="s3t" class="text-[11px] font-bold text-slate-400 tracking-wide">Completed</span>
@@ -272,17 +275,74 @@
 </div>
 
 <script>
+    // ទិន្នន័យម៉ឺនុយលម្អិត បេះបិតពី PDF (១០០%)
     const menuData = [
-        { id: 1, category: 'breakfast', name: 'Continental Breakfast', price: 9.50, icon: 'fa-mug-hot' },
-        { id: 2, category: 'breakfast', name: 'Asian Breakfast (Noodle/Congee)', price: 9.50, icon: 'fa-bowl-rice' },
-        { id: 3, category: 'starters', name: 'Salmon Gravlax', price: 10.00, icon: 'fa-fish' },
-        { id: 4, category: 'starters', name: 'Roasted Pumpkin Soup', price: 5.50, icon: 'fa-bowl-food' },
-        { id: 5, category: 'mains', name: 'Grilled Rib Eye Steak (200g)', price: 25.00, icon: 'fa-fire' },
-        { id: 6, category: 'mains', name: 'Grilled Salmon Fillet', price: 20.00, icon: 'fa-fish-fins' },
-        { id: 7, category: 'mains', name: 'Seafood Pizza', price: 11.00, icon: 'fa-pizza-slice' },
-        { id: 8, category: 'mains', name: 'Sunset Signature Fried Rice', price: 15.00, icon: 'fa-star' },
-        { id: 9, category: 'drinks', name: 'Fresh Orange Juice', price: 5.00, icon: 'fa-glass-water' },
-        { id: 10, category: 'drinks', name: 'Tiger / Heineken Beer', price: 4.00, icon: 'fa-beer-mug-empty' }
+        // Breakfast Set
+        { id: 1, category: 'breakfast', name: 'Continental Breakfast', cnName: '歐陸早餐', desc: 'Choice of fresh fruit juices (Pineapple or Orange or Watermelon), Fresh fruit platter, Freshly homemade bakeries, Choice of freshly brewed coffee or tea', price: 9.50, icon: 'fa-mug-hot' },
+        { id: 2, category: 'breakfast', name: 'Asian Breakfast', cnName: '亞洲早餐', desc: 'Fresh fruit platter, Choice of fresh fruit juices (Pineapple/Orange/Watermelon), Noodle soup (rice/egg noodle) (Seafood/Chicken/Beef), Choice of freshly brewed coffee or tea', price: 9.50, icon: 'fa-bowl-rice' },
+        
+        // Breakfast Favorites
+        { id: 3, category: 'breakfast', name: 'Farm eggs (2 pcs)', cnName: '各式雞蛋選擇(2顆)', desc: 'Two farm eggs prepared to your preference (Omelet/Scrambled/Fried/Poached/Boiled) with crispy bacon, chicken sausages, grilled tomatoes', price: 5.00, icon: 'fa-egg' },
+        { id: 4, category: 'breakfast', name: 'Grilled Marinated Pork or Chicken', cnName: '烤醃豬肉或雞肉', desc: 'Served with steamed rice and pickled vegetable', price: 7.50, icon: 'fa-bacon' },
+        { id: 5, category: 'breakfast', name: 'Porridge', cnName: '白粥', desc: 'Served with tofu, salty turnip, salty duck egg', price: 5.50, icon: 'fa-spoon' },
+        { id: 6, category: 'breakfast', name: 'Congee', cnName: '鹹粥(海鮮/豬肉/雞肉/魚肉)', desc: '(Seafood or Pork or Chicken or Fish)', price: 6.50, icon: 'fa-bowl-food' },
+
+        // Starters
+        { id: 7, category: 'starters', name: 'Salmon Gravlax', cnName: '醃製三文魚', desc: 'Salmon, lemon zest, dill, sour cream, asparagus, lemon wedge', price: 10.00, icon: 'fa-fish' },
+        { id: 8, category: 'starters', name: 'Avocado and crab meat salad', cnName: '酪梨蟹肉沙拉', desc: 'Avocado, crab meat, assorted baby herbs, lemon vinaigrette', price: 8.50, icon: 'fa-seedling' },
+        { id: 9, category: 'starters', name: 'Caesar salad', cnName: '凱撒沙拉', desc: 'Romaine lettuce, anchovy, parmesan cheese, crouton', price: 7.00, icon: 'fa-leaf' },
+
+        // Soups
+        { id: 10, category: 'starters', name: 'Roasted pumpkin and coconut cream soup', cnName: '烤南瓜椰奶濃湯', desc: 'with roasted almond, slice pumpkin, coconut shred, coconut cream, lemongrass', price: 5.50, icon: 'fa-bowl-food' },
+        { id: 11, category: 'starters', name: 'Crab meat soup', cnName: '中式蟹肉濃湯', desc: 'Golden Mushroom, White Egg, Crab Meat, Sesame Oil', price: 8.00, icon: 'fa-bowl-soup' },
+
+        // Pasta (Spaghetti, penne, or tagliatelle)
+        { id: 12, category: 'pasta', name: 'Healthy vegetarian', cnName: '健康蔬食', desc: 'Spaghetti/penne/tagliatelle, seasonal vegetables, tomato sauce, parmesan', price: 7.00, icon: 'fa-plate-wheat' },
+        { id: 13, category: 'pasta', name: 'Bolognese', cnName: '牛肉紅醬', desc: 'Spaghetti/penne/tagliatelle, grounded beef, tomato sauce, carrot, onion, red wine', price: 9.50, icon: 'fa-spaghetti-monster-flying' },
+        { id: 14, category: 'pasta', name: 'Carbonara', cnName: '培根蛋黃白醬', desc: 'Spaghetti/penne/tagliatelle, cream, yolk egg, bacon, white wine, parmesan', price: 8.50, icon: 'fa-cheese' },
+
+        // Pizza
+        { id: 15, category: 'pasta', name: 'Seafood pizza', cnName: '海鮮比薩', desc: 'Tomato sauce, squid, prawn, bell pepper, black olive, basil, mozzarella cheese', price: 11.00, icon: 'fa-pizza-slice' },
+        { id: 16, category: 'pasta', name: 'Margherita pizza', cnName: '瑪格麗塔比薩', desc: 'basil, oregano, tomato sauce, black olive mozzarella cheese', price: 9.00, icon: 'fa-fire-burner' },
+
+        // Rice and Noodle
+        { id: 17, category: 'asian', name: 'Crabmeat or seafood fried rice', cnName: '蟹肉/海鮮炒飯', desc: 'Crabmeat or seafood, egg fried rice, crispy garlic', price: 10.00, icon: 'fa-bowl-rice' },
+        { id: 18, category: 'asian', name: 'Sunset fried rice', cnName: '招牌炒飯', desc: 'Sweet & sour prawn, squid, chicken, pickle, fried rice, fried egg, slice tomato and cucumber', price: 15.00, icon: 'fa-star' },
+        { id: 19, category: 'asian', name: 'Wok-fried hofan with beef', cnName: '港式牛肉河粉', desc: 'Hong kong style, Flat noodle, soya sauce, bean sprout, spring onion, beef', price: 9.00, icon: 'fa-bowl-food' },
+
+        // Snacks
+        { id: 20, category: 'snacks', name: 'Chicken wings', cnName: '炸雞翅+薯條', desc: 'tartar sauce, French fries, salad', price: 7.50, icon: 'fa-drumstick-bite' },
+        { id: 21, category: 'snacks', name: 'Fish & Chips', cnName: '英式炸魚薯條', desc: 'Fish fillet, French fries, green salad, tartar sauce', price: 9.00, icon: 'fa-fish-fins' },
+        { id: 22, category: 'snacks', name: 'Ham & cheese sandwich', cnName: '火腿起司三明治', desc: 'Ham, cheese, sandwich bread', price: 7.50, icon: 'fa-bread-slice' },
+        { id: 23, category: 'snacks', name: 'French fries', cnName: '薯條', desc: 'Crispy french fries', price: 5.00, icon: 'fa-utensils' },
+
+        // Main Courses
+        { id: 24, category: 'mains', name: 'Grilled lamb chops (200g)', cnName: '烤羊排', desc: 'sautéed potato, seasonal vegetables, carrot purée, fresh rosemary sauce', price: 29.00, icon: 'fa-bone' },
+        { id: 25, category: 'mains', name: 'Grilled seabass', cnName: '檸檬奶油醬烤鱸魚', desc: 'Sea Bass Fillet, Cream, Lemon, Sautéed Potato, Seasonal Vegetables, lemon butter cream sauce', price: 16.00, icon: 'fa-fish' },
+        { id: 26, category: 'mains', name: 'Grilled prawn', cnName: '煎香大蝦', desc: 'sautéed potato, seasonal vegetables, red cabbage purée, prawn bisque sauce', price: 16.00, icon: 'fa-shrimp' },
+        { id: 27, category: 'mains', name: 'Grilled salmon fillet', cnName: '香煎三文魚', desc: 'Sautéed potato, seasonal vegetables, red cabbage purée, Lemon hollandaise sauce', price: 20.00, icon: 'fa-fish-fins' },
+        { id: 28, category: 'mains', name: 'Grilled duck breast(200g)', cnName: '香煎鴨胸', desc: 'Sauteed potato, seasonal vegetables, red cabbage purée, Red wine sauce', price: 12.00, icon: 'fa-fire' },
+        { id: 29, category: 'mains', name: 'Grilled rib eye steak (200g)', cnName: '烤肋眼牛排', desc: 'Sautéed potato, seasonal vegetables, carrot purée, Green pepper sauce', price: 25.00, icon: 'fa-fire' },
+
+        // Desserts
+        { id: 30, category: 'desserts', name: 'Assorted fresh fruit', cnName: '當季綜合水果', desc: 'Selection of seasonal fresh fruits', price: 5.50, icon: 'fa-apple-whole' },
+        { id: 31, category: 'desserts', name: 'Italian Tiramisu', cnName: '義式提拉米蘇', desc: 'Classic Italian coffee-flavored dessert', price: 7.00, icon: 'fa-cake-candles' },
+        { id: 32, category: 'desserts', name: 'Cheese platter', cnName: '綜合起司盤', desc: 'Assortment of fine cheeses', price: 10.00, icon: 'fa-cheese' },
+
+        // Beverages
+        { id: 33, category: 'drinks', name: 'Coke, light coke, soda water', cnName: '汽水', desc: 'Soft drinks', price: 2.50, icon: 'fa-bottle-water' },
+        { id: 34, category: 'drinks', name: 'Fresh watermelon, pineapple juice', cnName: '西瓜汁/鳳梨汁', desc: 'Freshly squeezed juice', price: 4.50, icon: 'fa-glass-water' },
+        { id: 35, category: 'drinks', name: 'Fresh orange juice', cnName: '鮮榨橙汁', desc: 'Freshly squeezed orange juice', price: 5.00, icon: 'fa-cup-straw' },
+        { id: 36, category: 'drinks', name: 'Cambodia lager 330ml', cnName: '柬埔寨啤酒', desc: 'Local lager beer bottle', price: 3.00, icon: 'fa-beer-mug-empty' },
+        { id: 37, category: 'drinks', name: 'Tiger, Heineken 330ml', cnName: '老虎/海尼根啤酒', desc: 'Imported beer bottle', price: 4.00, icon: 'fa-beer-mug-empty' },
+        { id: 38, category: 'drinks', name: 'Kulen Mineral Water 1500ml', cnName: 'Kulen 礦泉水 1500ml', desc: 'Mineral Water', price: 4.00, icon: 'fa-bottle-droplet' },
+        { id: 39, category: 'drinks', name: 'Kulen Mineral Water 500ml', cnName: 'Kulen 礦泉水 500ml', desc: 'Mineral Water', price: 2.00, icon: 'fa-bottle-droplet' },
+        { id: 40, category: 'drinks', name: 'Vital Local Water 1500ml', cnName: 'Vital 礦泉水 1500ml', desc: 'Local still water', price: 3.50, icon: 'fa-glass-water' },
+        { id: 41, category: 'drinks', name: 'Vital Local Water 500ml', cnName: 'Vital 礦泉水 500ml', desc: 'Local still water', price: 1.50, icon: 'fa-glass-water' },
+        { id: 42, category: 'drinks', name: 'San Pellegrino 750ml', cnName: '聖沛黎洛氣泡水 750ml', desc: 'Sparkling water', price: 5.00, icon: 'fa-wine-bottle' },
+        { id: 43, category: 'drinks', name: 'San Pellegrino 500ml', cnName: '聖沛黎洛氣泡水 500ml', desc: 'Sparkling water', price: 4.00, icon: 'fa-wine-bottle' },
+        { id: 44, category: 'drinks', name: 'Wine by glass (Red)', cnName: '單杯紅葡萄酒', desc: '6ème Sens, France (Syrah, grenache, merlot)', price: 5.00, icon: 'fa-wine-glass' },
+        { id: 45, category: 'drinks', name: 'Wine by glass (White)', cnName: '單杯白葡萄酒', desc: '6ème Sens, France (Sauvignon blanc, chardonnay, viognier)', price: 5.00, icon: 'fa-wine-glass-empty' }
     ];
 
     let cart = {};
@@ -295,22 +355,27 @@
         filtered.forEach((item, idx) => {
             const qty = cart[item.id] ? cart[item.id].qty : 0;
             const card = document.createElement('div');
-            card.className = 'bg-cardWhite p-3.5 rounded-2xl shadow-sm border border-slate-200/80 flex justify-between items-center menu-card card-enter';
-            card.style.animationDelay = (0.05 + idx * 0.05) + 's';
+            // Modified layout block to accommodate descriptions properly
+            card.className = 'bg-cardWhite p-3.5 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col space-y-2.5 menu-card card-enter';
+            card.style.animationDelay = (0.05 + idx * 0.03) + 's';
             card.innerHTML = `
-                <div class="flex items-center space-x-3 flex-1 pr-2">
-                    <div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center shrink-0 border border-sky-100 text-lg text-sky-500 shadow-sm">
+                <div class="flex items-start space-x-3 pr-1">
+                    <div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center shrink-0 border border-sky-100 text-lg text-sky-500 shadow-sm mt-0.5">
                         <i class="fa-solid ${item.icon}"></i>
                     </div>
-                    <div>
+                    <div class="flex-1">
                         <h3 class="font-bold text-sm text-navyPrimary leading-tight">${item.name}</h3>
-                        <p class="text-xs font-extrabold text-sky-500 mt-0.5">$${item.price.toFixed(2)}</p>
+                        ${item.cnName ? `<p class="text-[11px] text-slate-500 font-semibold mb-0.5">${item.cnName}</p>` : ''}
+                        <p class="text-[10.5px] text-slate-400 leading-snug line-clamp-3">${item.desc}</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-1 bg-slate-50 rounded-xl p-1 border border-slate-200">
-                    <button type="button" class="qty-btn w-8 h-8 flex items-center justify-center text-slate-500 bg-white rounded-lg shadow-sm border border-slate-200 btn-press font-bold" onclick="updateQty(${item.id}, -1)">-</button>
-                    <span id="qty-${item.id}" class="font-black text-navyDark w-6 text-center text-sm">${qty}</span>
-                    <button type="button" class="qty-btn w-8 h-8 flex items-center justify-center text-white bg-navyPrimary rounded-lg shadow-sm btn-press font-bold" onclick="updateQty(${item.id}, 1)">+</button>
+                <div class="flex justify-between items-center pt-2.5 border-t border-slate-100">
+                    <p class="text-[13px] font-extrabold text-sky-500">$${item.price.toFixed(2)}</p>
+                    <div class="flex items-center space-x-1 bg-slate-50 rounded-xl p-1 border border-slate-200 shrink-0">
+                        <button type="button" class="qty-btn w-8 h-8 flex items-center justify-center text-slate-500 bg-white rounded-lg shadow-sm border border-slate-200 btn-press font-bold" onclick="updateQty(${item.id}, -1)">-</button>
+                        <span id="qty-${item.id}" class="font-black text-navyDark w-6 text-center text-sm">${qty}</span>
+                        <button type="button" class="qty-btn w-8 h-8 flex items-center justify-center text-white bg-navyPrimary rounded-lg shadow-sm btn-press font-bold" onclick="updateQty(${item.id}, 1)">+</button>
+                    </div>
                 </div>`;
             container.appendChild(card);
         });
@@ -341,15 +406,18 @@
     }
 
     function updateCartFooter() {
-        let totalCount = 0, totalPrice = 0;
+        let totalCount = 0, subTotalPrice = 0;
         for (let id in cart) {
             totalCount += cart[id].qty;
-            totalPrice += cart[id].price * cart[id].qty;
+            subTotalPrice += cart[id].price * cart[id].qty;
         }
-        document.getElementById('totalQtyDisplay').innerText = totalCount;
         
+        // គណនាពន្ធ 10% និងសេវាកម្ម 5% = សរុប 15.5% (Subtotal x 1.155)
+        let grandTotal = subTotalPrice * 1.155;
+
+        document.getElementById('totalQtyDisplay').innerText = totalCount;
         const priceEl = document.getElementById('totalPriceDisplay');
-        priceEl.innerText = totalPrice.toFixed(2);
+        priceEl.innerText = grandTotal.toFixed(2);
         priceEl.classList.remove('num-flip'); void priceEl.offsetWidth; priceEl.classList.add('num-flip');
         
         const footer = document.getElementById('cartFooter');
@@ -376,24 +444,32 @@
 
         const container = document.getElementById('modalCartItems');
         container.innerHTML = '';
-        let total = 0;
+        let subTotal = 0;
 
         for (let id in cart) {
             const item = cart[id];
-            total += item.price * item.qty;
+            subTotal += item.price * item.qty;
             container.innerHTML += `
                 <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
-                    <div>
-                        <p class="font-bold text-navyPrimary text-xs">${item.name}</p>
-                        <p class="text-[10px] text-slate-400 font-semibold">$${item.price.toFixed(2)} / item</p>
+                    <div class="pr-2">
+                        <p class="font-bold text-navyPrimary text-xs leading-tight">${item.name}</p>
+                        <p class="text-[10px] text-slate-400 font-semibold mt-0.5">$${item.price.toFixed(2)} / item</p>
                     </div>
-                    <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-3 shrink-0">
                         <span class="bg-sky-50 text-sky-600 font-extrabold text-xs px-2 py-1 rounded-lg">x${item.qty}</span>
                         <span class="font-black text-navyPrimary text-sm">$${(item.price * item.qty).toFixed(2)}</span>
                     </div>
                 </div>`;
         }
-        document.getElementById('modalTotalAmount').innerText = total.toFixed(2);
+        
+        // Breakdown Math (+15.5%)
+        const taxAndService = subTotal * 0.155;
+        const grandTotal = subTotal + taxAndService;
+
+        document.getElementById('modalSubtotal').innerText = subTotal.toFixed(2);
+        document.getElementById('modalTax').innerText = taxAndService.toFixed(2);
+        document.getElementById('modalTotalAmount').innerText = grandTotal.toFixed(2);
+        
         document.getElementById('checkoutModal').classList.remove('hidden');
         resetSlider();
     }
@@ -506,4 +582,4 @@
     renderMenu('all');
 </script>
 </body>
-</html>s
+</html>
